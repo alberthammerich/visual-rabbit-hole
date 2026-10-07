@@ -4,6 +4,28 @@
 
 An agent skill for curious people. Get the insight in chat, then explore an interactive page with diagrams you can step through, questions you can try, and side quests worth following.
 
+![Visual lesson: pi is irrational, but how irrational? Comparing 22/7 and 355/113 reveals the meaning of the reported irrationality exponent 2. One exceptional fraction does not contradict a statement about infinitely many approximations.](assets/pi-irrationality-example.png)
+
+*An illustrative lesson preview based on [OpenAI's September 2026 preprint](https://github.com/openai/math/blob/main/preprints/The-irrationality-exponent-of-pi-is-2-September-24-2026/paper.pdf). OpenAI reports μ(π) = 2 and [lists a Lean formalization](https://github.com/openai/math/blob/main/lean/docs/017.md); this graphic explains the claim, not its proof.*
+
+<details>
+<summary>Read the example in text</summary>
+
+**π is irrational. But how irrational?** Fractions can get astonishingly close. The discovery is about how often.
+
+| Fraction | Decimal approximation | Absolute error from π |
+| --- | --- | --- |
+| 22/7 | 3.1428571429 | ≈ 0.0012644893 |
+| 355/113 | 3.1415929204 | ≈ 0.0000002668 |
+
+The second fraction is about **4,740 times closer**. For comparison, π ≈ 3.1415926536.
+
+The reported result, μ(π) = 2, means that for every fixed ε > 0, only finitely many fractions p/q, with integer p and positive integer q, satisfy `|π − p/q| < 1/q^(2+ε)`. One unusually accurate fraction does not contradict it: the claim allows finitely many exceptions. The picture illustrates this distinction; it does not establish the theorem.
+
+**Next rabbit hole:** How do continued fractions find such good approximations?
+
+</details>
+
 ## a taste
 
 You make one machine twice as fast. The factory produces exactly as much.
