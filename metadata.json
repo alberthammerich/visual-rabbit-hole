@@ -1,6 +1,6 @@
 {
-  "version": "1.0.0",
+  "version": "2.0.0",
   "organization": "alberthammerich",
   "date": "October 2026",
-  "abstract": "Explore concepts through concrete puzzles, evolving diagrams, and connected rabbit holes. Build intuition, test the limits of a model, and follow questions deeper or across disciplines. Continue from the learner's discoveries within the conversation, using sources when claims need verification."
+  "abstract": "Explore concepts through concrete puzzles, a short visual explanation in chat, and an interactive HTML page with evolving diagrams, application quizzes, and side quests. Follow connected questions deeper, across disciplines, or into the limits of a model, with per-page progress tracking."
 }

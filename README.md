@@ -2,7 +2,7 @@
 
 **Come for an explanation. Leave with a better question.**
 
-An agent skill for curious people. Start with a puzzle, watch an idea take shape, and follow whichever thread catches your attention.
+An agent skill for curious people. Get the insight in chat, then explore an interactive page with diagrams you can step through, questions you can try, and side quests worth following.
 
 ## a taste
 
@@ -42,6 +42,17 @@ Now there's somewhere to go:
 
 Pick a thread. Keep the picture. See what changes.
 
+## take it for a spin
+
+The chat gives you that first insight. The page lets you work with it:
+
+- **Change the picture.** Step through an upgrade and watch the bottleneck move.
+- **Try a new case.** Quiz answers explain the reasoning. Wrong answers stay retryable.
+- **Follow a side quest.** Go deeper, connect to another field, or test where the model breaks. Each quest has its own lesson, diagram, and questions.
+- **Keep going.** Copy a quest's continuation prompt into chat for the next page, building on the model you've explored.
+
+Explore quests in any order. A tracker shows which ones you've cleared, with progress saved in that browser when storage is available.
+
 ## install
 
 ```bash
@@ -54,7 +65,7 @@ Choose your agent in the installer. Supports Claude Code, Codex, Cursor, OpenCod
 
 Ask your agent to use visual-rabbit-hole:
 
-> Use visual-rabbit-hole to explain recursion.
+> Use visual-rabbit-hole to teach me recursion.
 
 > Help me understand entropy with visual-rabbit-hole.
 
@@ -70,11 +81,15 @@ Then follow what interests you:
 
 Explanations build on the conversation: the useful diagram stays, the model grows, and each branch starts from what you've already explored. For a quick clarification, ask directly. For a more interactive session, ask to predict what happens before the reveal.
 
+Want just the short version? Say **"quick"** or **"no page."** Follow-ups stay in chat unless you choose another quest or ask to update the page.
+
+Pages open through your agent's artifact or HTML preview when available. Otherwise, you get a standalone HTML file in the configured output directory, or `./rabbit-holes/YYYY-MM-DD-<slug>.html`.
+
 ## the idea
 
 Intuition first. Give the question a reason to matter, then make the mechanism visible. Use an analogy while it helps, and show where it breaks. Follow connections that share something specific: a constraint, a feedback loop, a pattern.
 
-Text diagrams work right in chat. When the agent supports richer visuals, a small interactive illustration can help you explore what changes. Sources ground explanations when facts need checking.
+Text diagrams work right in chat; HTML and SVG bring the page to life. Sources ground explanations when facts need checking.
 
 Science, code, history, philosophy—start wherever you're curious.
 

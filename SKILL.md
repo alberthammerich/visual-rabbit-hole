@@ -1,52 +1,76 @@
 ---
 name: visual-rabbit-hole
-description: "Explain concepts through concrete puzzles, evolving diagrams, and connected rabbit holes. Use when the user wants an intuitive explanation or to explore an idea across science, code, history, philosophy, or other domains."
+description: "Teach concepts through puzzles, a short visual explanation in chat, and an interactive HTML page with diagrams, quizzes, and side quests. Use for 'teach me', 'help me understand', deep dives, ELI5, rabbit holes, or /visual-rabbit-hole. Quick facts and explanations of code in the current repo do not trigger it."
 ---
 
 # Visual Rabbit Hole
 
-Make the learner feel they could have discovered the idea themselves. Build intuition through a concrete question, a visible mechanism, and a next question worth following. Talk like a curious friend at a whiteboard; let the subject and the user's requested depth determine the shape of the answer.
+Make the learner feel they could have discovered the idea themselves. Start with a concrete puzzle, reveal a mechanism through a changing visual, and offer questions worth following. The chat gives the insight; the page lets the learner experiment and apply it.
 
-## Start with something to discover
+## Choose the surfaces
 
-For a new concept, find a small puzzle, surprising outcome, or practical frustration that creates a need for the idea. Make the situation concrete enough that the learner can imagine what happens. For interpretive subjects, use a tension between perspectives rather than inventing a single correct mechanism.
+- **New concept:** give the short chat explanation, then build an interactive page.
+- **Quick / no page / just ELI5:** answer in chat only.
+- **Follow-up or clarification:** answer the point directly in chat. Add a diagram if it helps.
+- **Selected side quest / rabbit hole: X:** build the next explanation and page from that branch. Carry forward the useful model, labels, assumptions, and discoveries from the conversation instead of restarting.
+- **Update this page:** revise the existing artifact or file, keeping solved answers only when the questions and answers remain unchanged.
 
-Give the learner a moment to predict, then explain the outcome in the same response. Pause for their prediction only when they request an interactive session; the answer should otherwise stand on its own. A request for a quick fact or clarification gets a direct answer at that scale.
+Give a prediction moment, then explain in the same response. Pause for the user's answer only if they ask for an interactive chat session. Page quizzes and controls let them explore at their own pace.
 
-Use a tangible analogy when it makes the mechanism easier to see. Keep one useful model and extend it rather than switching metaphors at every turn. Name the concept once the learner has a reason to want it, and introduce formal terms or equations when they sharpen the understanding.
+## The chat
 
-## Make the mechanism visible
+Aim for one screen:
 
-Use a compact visual that does explanatory work: a before-and-after, a sequence, a timeline, a comparison, or a zoom into the important part. Show what changes, what stays fixed, and why the outcome follows. Label units and assumptions when they affect the result.
+1. A concrete puzzle or frustration that creates a need for the concept, followed by the key insight or analogy.
+2. One compact text diagram showing a change, comparison, or sequence. Keep it around 60 columns wide and label what stays fixed.
+3. A meaningful misconception or limit of the model, if relevant.
 
-Text diagrams are the portable default. Keep labels consistent across states and lines narrow enough to read in chat. For a process, vary one meaningful input or constraint so the reader can trace its effect; for an argument, show how changing a premise changes the conclusion. Omit a diagram when it adds no understanding.
+After building the page, finish with its actual link and a few side-quest questions. For chat-only requests, offer a next question only when useful. The page expands the same model and stays consistent with the chat.
 
-If the environment supports richer visuals, use a small interactive illustration when changing a variable or stepping through states teaches more than a static picture. Reuse available capabilities and fall back to text when they are unavailable. The explanation must remain understandable without the interaction.
+## The page
 
-## Follow the thread
+Start from [references/template.html](references/template.html). Keep its quiz, stepper, copy-button, and tracker markup so the existing script works. Use one readable page with a table of contents; adapt section names to the subject.
 
-Offer a few compelling next questions when there is somewhere useful to go. Choose from these directions rather than filling a quota:
+1. **Setup:** pose the puzzle before revealing the concept. Include skippable beginner background where needed. Distinguish invented teaching scenarios from historical events. For interpretive subjects, explore a tension between perspectives rather than inventing a single correct mechanism.
+2. **Intuition:** map a tangible analogy onto the idea, then work an example with actual numbers, names, or steps. Reuse one model and change a meaningful input or constraint. Show what changes, what stays fixed, and why the result follows. Introduce formal terms or equations when they sharpen understanding.
+3. **Model limits / Gotcha:** explain where the analogy or simplifying assumption stops working. Correct a misconception that matters here, without claiming everyone makes it.
+4. **Checkpoint:** three application questions on the core concept.
+5. **Side quests:** three or four cards, each with a question as its title, a hook, a short lesson (roughly 150–300 words), a diagram, and two application questions. Let the user explore them in any order. Choose useful branches from:
+   - **Go deeper:** uncover the next mechanism or change a constraint.
+   - **Go sideways:** connect to another field, naming the specific shared structure and its limits. Include one well-supported connection.
+   - **Break the model:** test an assumption or find a case the current picture cannot explain.
 
-- **Go deeper:** change a constraint or uncover the mechanism beneath this one.
-- **Go sideways:** connect to another field, naming the specific shared structure and the limits of the connection.
-- **Break the model:** test a simplifying assumption or find a case the current picture cannot explain.
+   End each quest with a copyable `rabbit hole: <question>` prompt. Include the parent concept and one relevant assumption when needed to make the continuation understandable in a fresh chat. The tracker marks a quest cleared when its questions are answered correctly; it does not gate access to other lessons.
+6. **Sources:** link sources actually used, with a line explaining what each supports. Also place citations near claims when helpful.
 
-Phrase each branch as a question with a distinct payoff. Prefer "What happens after you upgrade the slowest machine?" to a bare topic label such as "Optimization."
+A later page opens with the question it branched from and updates the useful parts of the previous visual. A short breadcrumb such as `Bottlenecks → Changing constraints → Queues` can orient a longer journey. Use conversation context and any context included in the copied prompt; ask briefly if a bare quest selection cannot be resolved.
 
-When the user picks a branch, resolve it from the actual preceding options and continue from the model, labels, assumptions, and discoveries already in the conversation. Update the relevant part of the diagram; explain new concepts as needed. After several branches, a short breadcrumb can orient the learner, such as `Bottlenecks → Changing constraints → Queues`. Use conversation context; only create a saved learning trail if requested.
+## Quizzes
 
-For a narrow follow-up, answer the point directly. Add another branch only when it opens a useful new question. Let the learner stop with a satisfying explanation at any turn.
+Test application to a new case, not recognition of a definition. Use medium difficulty, clear wording, three or four plausible options, and vary the correct option's position. Build distractors from misconceptions the lesson addresses.
 
-## Keep the explanation honest
+Give every option feedback explaining the reasoning. Wrong answers stay retryable. For debated topics, test reasoning under stated premises rather than grading a contested opinion as fact.
 
-State where an analogy or simplified model stops working. Use that boundary to motivate the next idea when useful. Distinguish an exact relationship from a suggestive resemblance, and an invented teaching scenario from a historical event or measured result.
+Keep the template's best-effort, per-page progress storage. When revising quiz content or order in an existing page, change its storage key so stale answers cannot mark new questions solved.
 
-Be clear about what is established, simplified, debated, or uncertain. Correct a misconception when it matters to this explanation; earn surprise from the mechanism rather than claims about what "everyone" gets wrong.
+## Visuals
 
-Use available search tools for current, niche, uncertain, or high-stakes claims, and for examples that depend on external facts. Prefer primary sources and link them near the claims they support. When verification is unavailable, state the limitation and keep the explanation within what can be supported.
+Use two or three visual families consistently across the page and quests. Draw with inline SVG or HTML/CSS; reserve ASCII diagrams for chat. Label units and assumptions when they affect the result, and keep colors and labels consistent across states.
 
-Keep paragraphs short and questions purposeful. Let the discovery carry the enthusiasm. Adapt the structure to the idea instead of repeating fixed headings in every answer.
+For motion, iteration, or a changing parameter, use the template's step-through or a small native control that reveals cause and effect. Provide captions so the explanation remains understandable without interaction. Use HTML lists for lists and `<pre>` for code or formulas. Keep controls keyboard-accessible and give diagrams meaningful text alternatives.
 
-## Examples
+## Accuracy and voice
 
-For a worked conversation showing a new explanation, a selected branch, and the limits of the model, read [references/example-explanations.md](references/example-explanations.md). It also shows a concise clarification and an optional prediction pause. Use these as illustrations of the behavior, adapting the topic and presentation to the user.
+Talk like a curious friend at a whiteboard: short paragraphs, purposeful questions, and delight earned by the discovery. Be clear about what is established, simplified, debated, or uncertain. Distinguish an exact relationship from a suggestive resemblance.
+
+Use available search tools for current, niche, uncertain, or high-stakes claims, and examples dependent on external facts. Prefer primary sources. If verification is unavailable, say so and stay within what can be supported.
+
+## Delivery and checks
+
+Use the host's available artifact or HTML preview tools. Follow relevant tool guidance when present; the skill must also work as a standalone HTML file without a particular publishing plugin.
+
+For local delivery, use the user's requested location or the environment's output directory. Otherwise use `./rabbit-holes/YYYY-MM-DD-<slug>.html`. Open it with an available viewer and provide a clickable link. Reuse an existing file only when updating that explanation; keep separate explorations distinct.
+
+Before delivery, replace the template placeholders and check the page's diagrams, questions, and links. When a browser is available, exercise the stepper, a wrong-answer retry, quiz feedback, quest completion, reload persistence, and the copy prompt. If browser verification is unavailable, report that limit.
+
+For an example of the chat/page split and a three-turn journey, read [references/example-explanations.md](references/example-explanations.md).
