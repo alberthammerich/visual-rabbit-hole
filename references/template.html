@@ -1,0 +1,190 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>CONCEPT</title>
+<style>
+  :root {
+    --bg: #fbfaf7; --fg: #1d1d1f; --muted: #6b6b70; --line: #e3e0d8; --card: #ffffff;
+    --accent: #b4561f; --ok: #1f7a4d; --ok-bg: #e6f4ec; --bad: #a3322a; --bad-bg: #fbeae8;
+    --callout: #fff5e6;
+  }
+  @media (prefers-color-scheme: dark) {
+    :root:not([data-theme="light"]) {
+      --bg: #17171a; --fg: #ececee; --muted: #9a9aa2; --line: #2e2e34; --card: #1f1f24;
+      --accent: #e58a52; --ok: #5cc794; --ok-bg: #16352a; --bad: #ef7f74; --bad-bg: #3a1c1a;
+      --callout: #2a2216;
+    }
+  }
+  :root[data-theme="dark"] {
+    --bg: #17171a; --fg: #ececee; --muted: #9a9aa2; --line: #2e2e34; --card: #1f1f24;
+    --accent: #e58a52; --ok: #5cc794; --ok-bg: #16352a; --bad: #ef7f74; --bad-bg: #3a1c1a;
+    --callout: #2a2216;
+  }
+  * { box-sizing: border-box; }
+  body { margin: 0; background: var(--bg); color: var(--fg);
+    font: 17px/1.65 Georgia, "Iowan Old Style", serif; }
+  main { max-width: 720px; margin: 0 auto; padding: 32px 16px 96px; }
+  h1, h2, h3, nav, button, .tracker, .hook { font-family: system-ui, -apple-system, sans-serif; }
+  h1 { font-size: 2rem; line-height: 1.2; margin: 0 0 8px; }
+  h2 { margin-top: 56px; border-top: 1px solid var(--line); padding-top: 24px; }
+  a { color: var(--accent); }
+  nav ol { padding-left: 20px; color: var(--muted); }
+  pre { white-space: pre-wrap; background: var(--card); border: 1px solid var(--line);
+    padding: 12px; border-radius: 8px; overflow-x: auto; }
+  svg { max-width: 100%; height: auto; display: block; margin: 16px auto; }
+  svg text { fill: var(--fg); font: 13px system-ui, sans-serif; }
+  .callout { background: var(--callout); border-left: 4px solid var(--accent);
+    padding: 12px 16px; border-radius: 4px; margin: 20px 0; }
+  details.background { border: 1px dashed var(--line); border-radius: 8px; padding: 8px 16px; }
+  details.background summary { cursor: pointer; color: var(--muted); font-family: system-ui, sans-serif; }
+
+  /* Step-through: .steps > .step (frames) + one .stepper control row */
+  .steps .step { display: none; } .steps .step.on { display: block; }
+  .stepper { display: flex; gap: 8px; align-items: center; font-family: system-ui, sans-serif; }
+  .stepper span { color: var(--muted); font-size: 14px; }
+
+  /* Quiz: .quiz > .q + buttons with data-fb (+ data-correct on the right one) */
+  .quiz { background: var(--card); border: 1px solid var(--line); border-radius: 10px;
+    padding: 16px; margin: 16px 0; }
+  .quiz .q { margin: 0 0 12px; font-weight: 600; }
+  .quiz button, .stepper button, .copy { display: block; width: 100%; text-align: left; margin: 6px 0;
+    padding: 10px 12px; border: 1px solid var(--line); border-radius: 8px; background: var(--bg);
+    color: var(--fg); font-size: 15px; cursor: pointer; }
+  .stepper button { width: auto; display: inline-block; margin: 0; }
+  .quiz button.right { border-color: var(--ok); background: var(--ok-bg); }
+  .quiz button.wrong { border-color: var(--bad); background: var(--bad-bg); }
+  .quiz .fb { margin: 10px 0 0; font-size: 15px; }
+  button:focus-visible { outline: 2px solid var(--accent); outline-offset: 2px; }
+
+  .quest { border: 1px solid var(--line); border-radius: 12px; padding: 4px 20px 16px;
+    margin: 24px 0; background: var(--card); }
+  .quest.cleared { border-color: var(--ok); }
+  .quest .kind { font: 600 12px system-ui, sans-serif; text-transform: uppercase;
+    letter-spacing: .06em; color: var(--accent); margin-top: 16px; }
+  .quest.cleared .kind::after { content: " · cleared ✓"; color: var(--ok); }
+  .hook { color: var(--muted); margin-top: -8px; }
+  .tracker { position: sticky; top: 0; background: var(--bg); padding: 8px 0;
+    border-bottom: 1px solid var(--line); font-size: 14px; color: var(--muted); z-index: 1; }
+  .tracker progress { width: 120px; vertical-align: middle; accent-color: var(--ok); }
+  .copy { font-family: ui-monospace, monospace; font-size: 14px; }
+</style>
+</head>
+<body>
+<main>
+  <h1>CONCEPT</h1>
+  <p class="hook">One sentence on why this is worth your next 15 minutes.</p>
+
+  <nav><ol>
+    <li><a href="#setup">The Setup</a></li>
+    <li><a href="#intuition">The Intuition</a></li>
+    <li><a href="#gotcha">The Gotcha</a></li>
+    <li><a href="#checkpoint">Checkpoint</a></li>
+    <li><a href="#quests">Side Quests</a></li>
+  </ol></nav>
+
+  <h2 id="setup">The Setup</h2>
+  <details class="background"><summary>Background for beginners (skip if you know the field)</summary>
+    <p>...</p>
+  </details>
+  <p>The problem that made someone invent this...</p>
+
+  <h2 id="intuition">The Intuition</h2>
+  <p>Analogy, then a worked example with toy data.</p>
+  <div class="steps">
+    <div class="step on"><!-- frame 1: SVG + caption --></div>
+    <div class="step"><!-- frame 2 --></div>
+    <div class="stepper"><button data-dir="-1">← Back</button><button data-dir="1">Next →</button><span></span></div>
+  </div>
+
+  <h2 id="gotcha">The Gotcha</h2>
+  <div class="callout"><strong>Most people think</strong> X. <strong>Actually,</strong> Y.</div>
+
+  <h2 id="checkpoint">Checkpoint</h2>
+  <div class="quiz">
+    <p class="q">Question that applies the idea to a new case?</p>
+    <button data-fb="Why this is wrong.">Option A</button>
+    <button data-correct data-fb="Why this is right.">Option B</button>
+    <button data-fb="Why this is wrong (the Gotcha misconception).">Option C</button>
+    <p class="fb" aria-live="polite"></p>
+  </div>
+
+  <h2 id="quests">Side Quests</h2>
+  <div class="tracker"><progress value="0"></progress> <span></span></div>
+
+  <section class="quest">
+    <p class="kind">Go deeper</p>
+    <h3>Quest title</h3>
+    <p class="hook">One-line hook.</p>
+    <p>150-300 word lesson + one diagram from the page's diagram families.</p>
+    <div class="quiz">
+      <p class="q">Question?</p>
+      <button data-correct data-fb="Why.">Option A</button>
+      <button data-fb="Why not.">Option B</button>
+      <button data-fb="Why not.">Option C</button>
+      <p class="fb" aria-live="polite"></p>
+    </div>
+    <button class="copy" title="Copy">rabbit hole: Quest title</button>
+  </section>
+  <!-- section.quest with <p class="kind">Surprising connection</p> for the cross-field quest -->
+</main>
+
+<script>
+  // Quizzes: wrong answers stay retryable; solved state is per-page in localStorage (best effort).
+  const key = 'vrh:' + location.pathname + document.title;
+  let solved = {};
+  try { solved = JSON.parse(localStorage.getItem(key)) || {}; } catch {}
+  const save = () => { try { localStorage.setItem(key, JSON.stringify(solved)); } catch {} };
+
+  const quizzes = [...document.querySelectorAll('.quiz')];
+  quizzes.forEach((quiz, i) => {
+    const fb = quiz.querySelector('.fb');
+    const answer = (btn, silent) => {
+      btn.classList.add('correct' in btn.dataset ? 'right' : 'wrong');
+      fb.textContent = ('correct' in btn.dataset ? '✓ ' : '✗ ') + btn.dataset.fb;
+      if ('correct' in btn.dataset) {
+        quiz.querySelectorAll('button').forEach(b => b.disabled = true);
+        solved[i] = true; if (!silent) save();
+        updateQuests();
+      }
+    };
+    quiz.querySelectorAll('button').forEach(b => b.addEventListener('click', () => answer(b)));
+    if (solved[i]) answer(quiz.querySelector('[data-correct]'), true);
+  });
+
+  function updateQuests() {
+    const quests = [...document.querySelectorAll('.quest')];
+    const done = quests.filter(q => {
+      const ok = [...q.querySelectorAll('.quiz')].every(z => solved[quizzes.indexOf(z)]);
+      q.classList.toggle('cleared', ok);
+      return ok;
+    }).length;
+    const bar = document.querySelector('.tracker progress');
+    if (!bar) return;
+    bar.max = quests.length; bar.value = done;
+    document.querySelector('.tracker span').textContent = `${done} / ${quests.length} quests cleared`;
+  }
+  updateQuests();
+
+  // Step-throughs
+  document.querySelectorAll('.steps').forEach(box => {
+    const frames = [...box.querySelectorAll('.step')], label = box.querySelector('.stepper span');
+    let n = 0;
+    const show = () => { frames.forEach((f, i) => f.classList.toggle('on', i === n)); label.textContent = `${n + 1} / ${frames.length}`; };
+    box.querySelectorAll('.stepper button').forEach(b => b.addEventListener('click', () => {
+      n = Math.max(0, Math.min(frames.length - 1, n + +b.dataset.dir)); show();
+    }));
+    show();
+  });
+
+  // Copy "rabbit hole: X" prompts
+  document.querySelectorAll('.copy').forEach(b => b.addEventListener('click', async () => {
+    const text = b.dataset.text ??= b.textContent;
+    try { await navigator.clipboard.writeText(text); b.textContent = 'Copied: ' + text; }
+    catch { b.textContent = text + ' (select and copy)'; }
+    setTimeout(() => b.textContent = text, 1500);
+  }));
+</script>
+</body>
+</html>
