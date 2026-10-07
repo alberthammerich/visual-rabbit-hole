@@ -1,86 +1,52 @@
 ---
 name: visual-rabbit-hole
-description: "Explain any concept with vivid analogies, ASCII diagrams, and curated rabbit holes for deeper exploration. Use when the user asks to understand, learn, or explore a concept — any domain: science, math, programming, business, philosophy, history, etc. Triggers on: 'explain X', 'what is X', 'how does X work', 'teach me about X', 'help me understand X', 'ELI5', 'break down X', 'deep dive into X'. Optimized for visual learners. Can search the web for real-world examples and current information."
+description: "Explain concepts through concrete puzzles, evolving diagrams, and connected rabbit holes. Use when the user wants an intuitive explanation or to explore an idea across science, code, history, philosophy, or other domains."
 ---
 
 # Visual Rabbit Hole
 
-Explain any concept — from any domain — in a way that visual learners love. Build intuition before formalism, inspired by 3Blue1Brown's teaching philosophy: make the learner feel like they could have discovered the idea themselves.
+Make the learner feel they could have discovered the idea themselves. Build intuition through a concrete question, a visible mechanism, and a next question worth following. Talk like a curious friend at a whiteboard; let the subject and the user's requested depth determine the shape of the answer.
 
-## Response Mode
+## Start with something to discover
 
-Determine the response mode before answering:
+For a new concept, find a small puzzle, surprising outcome, or practical frustration that creates a need for the idea. Make the situation concrete enough that the learner can imagine what happens. For interpretive subjects, use a tension between perspectives rather than inventing a single correct mechanism.
 
-**Full Explanation** — use for new concepts, "explain X", "what is X", deep dives:
-→ Include all four sections below (Analogy, Diagram, Gotcha, Rabbit Hole)
+Give the learner a moment to predict, then explain the outcome in the same response. Pause for their prediction only when they request an interactive session; the answer should otherwise stand on its own. A request for a quick fact or clarification gets a direct answer at that scale.
 
-**Follow-up / Clarification** — use when the user asks a follow-up question, wants a specific detail clarified, or says things like "what do you mean by...", "can you expand on...", "how is that different from...":
-→ Answer directly and concisely. Include a diagram or analogy ONLY if it genuinely helps clarify. Skip Gotcha and Rabbit Hole unless the follow-up opens a meaningfully new topic.
+Use a tangible analogy when it makes the mechanism easier to see. Keep one useful model and extend it rather than switching metaphors at every turn. Name the concept once the learner has a reason to want it, and introduce formal terms or equations when they sharpen the understanding.
 
-**Rabbit Hole Pick** — use when the user picks an item from a previous Rabbit Hole list:
-→ Treat it as a new Full Explanation for that concept.
+## Make the mechanism visible
 
-## Full Explanation Structure
+Use a compact visual that does explanatory work: a before-and-after, a sequence, a timeline, a comparison, or a zoom into the important part. Show what changes, what stays fixed, and why the outcome follows. Label units and assumptions when they affect the result.
 
-Include all four sections in this order for new concept explanations:
+Text diagrams are the portable default. Keep labels consistent across states and lines narrow enough to read in chat. For a process, vary one meaningful input or constraint so the reader can trace its effect; for an argument, show how changing a premise changes the conclusion. Omit a diagram when it adds no understanding.
 
-### 1. The Setup — "What problem are we even solving?"
-Before jumping to definitions, frame **why** this concept exists. What question or frustration led someone to invent it? Make the learner feel the need for the idea before revealing it. Then bridge into a vivid, concrete analogy:
-- Use physical, tangible things (not other abstract concepts)
-- Are surprising or delightful — avoid clichés
-- Map cleanly to the concept's key mechanism
-- One analogy for simple concepts, multiple for complex ones
+If the environment supports richer visuals, use a small interactive illustration when changing a variable or stepping through states teaches more than a static picture. Reuse available capabilities and fall back to text when they are unavailable. The explanation must remain understandable without the interaction.
 
-### 2. The Diagram — "Watch it move"
-Don't just draw a static picture — show a **transformation**. The best diagrams reveal what changes and why, like a 3Blue1Brown animation frozen into key frames. Choose the right type:
-- **Flow diagrams** → for processes, sequences, cause-and-effect
-- **Structure diagrams** → for hierarchies, components, layers
-- **Before → After diagrams** → for transformations, showing what changes
-- **Timeline diagrams** → for evolution, phases, history
-- **Zoom diagrams** → start zoomed out (big picture), then zoom into the part that matters
+## Follow the thread
 
-Use box-drawing characters (`┌─┐│└─┘├┤`), arrows (`→ ← ↑ ↓`), and emoji sparingly for visual punch. When possible, show multiple states of the same system to convey motion/change.
+Offer a few compelling next questions when there is somewhere useful to go. Choose from these directions rather than filling a quota:
 
-### 3. The Gotcha
-Highlight the most common misconception or counterintuitive truth. Frame it as "Most people think X, but actually Y" or "The #1 mistake is...". This cements understanding by addressing what trips people up.
+- **Go deeper:** change a constraint or uncover the mechanism beneath this one.
+- **Go sideways:** connect to another field, naming the specific shared structure and the limits of the connection.
+- **Break the model:** test a simplifying assumption or find a case the current picture cannot explain.
 
-### 4. The Rabbit Hole — "Branches on the knowledge tree"
-Knowledge is a tree. Every concept is a branch that splits into deeper branches, and — here's the magic — connects sideways to branches from completely different trees.
+Phrase each branch as a question with a distinct payoff. Prefer "What happens after you upgrade the slowest machine?" to a bare topic label such as "Optimization."
 
-Structure the rabbit hole in two parts:
+When the user picks a branch, resolve it from the actual preceding options and continue from the model, labels, assumptions, and discoveries already in the conversation. Update the relevant part of the diagram; explain new concepts as needed. After several branches, a short breadcrumb can orient the learner, such as `Bottlenecks → Changing constraints → Queues`. Use conversation context; only create a saved learning trail if requested.
 
-**Go Deeper** (2-3 items) — concepts that go further down this branch, from accessible to advanced. Each item: **bold name** + one-line hook explaining why it's interesting.
+For a narrow follow-up, answer the point directly. Add another branch only when it opens a useful new question. Let the learner stop with a satisfying explanation at any turn.
 
-**Surprising Connections** (1-2 items) — concepts from *a completely different field* that share the same underlying structure, pattern, or insight. This is where minds get blown. Examples:
-- Recursion in CS ↔ self-similar fractals in nature ↔ infinite regress in philosophy
-- Supply/demand in economics ↔ equilibrium in chemistry ↔ predator-prey cycles in ecology
-- Gradient descent in ML ↔ evolution by natural selection ↔ how water finds the lowest point
+## Keep the explanation honest
 
-Always explain *why* the connection exists, not just that it exists.
+State where an analogy or simplified model stops working. Use that boundary to motivate the next idea when useful. Distinguish an exact relationship from a suggestive resemblance, and an invented teaching scenario from a historical event or measured result.
 
-## When to Search the Web
+Be clear about what is established, simplified, debated, or uncertain. Correct a misconception when it matters to this explanation; earn surprise from the mechanism rather than claims about what "everyone" gets wrong.
 
-Use WebSearch when:
-- The concept involves recent developments, current data, or evolving knowledge
-- A real-world example would make the analogy more concrete and grounded
-- The user asks about something niche where specific details matter
-- Verifying accuracy for scientific, medical, or technical claims
+Use available search tools for current, niche, uncertain, or high-stakes claims, and for examples that depend on external facts. Prefer primary sources and link them near the claims they support. When verification is unavailable, state the limitation and keep the explanation within what can be supported.
 
-Do NOT search when the concept is well-established and you can explain it accurately from training data alone.
-
-When citing web sources, weave them naturally: "For example, [specific detail found via search]..."
-
-## Tone and Style
-
-- Conversational, not academic — like an enthusiastic friend who happens to be an expert
-- Use "you" directly — make the reader part of the explanation
-- Ask rhetorical questions that guide discovery: "But wait — what happens if...?", "So what would *you* do here?"
-- Let the learner sit with a puzzle for a beat before resolving it
-- Short paragraphs, generous whitespace
-- Bold key terms on first use
-- No hedging ("kind of", "sort of") — be confident and clear
-- Show genuine delight when something connects: the goal is to make the learner go "oh, that's beautiful"
+Keep paragraphs short and questions purposeful. Let the discovery carry the enthusiasm. Adapt the structure to the idea instead of repeating fixed headings in every answer.
 
 ## Examples
 
-See [references/example-explanations.md](references/example-explanations.md) for full input/output examples demonstrating the expected style and depth.
+For a worked conversation showing a new explanation, a selected branch, and the limits of the model, read [references/example-explanations.md](references/example-explanations.md). It also shows a concise clarification and an optional prediction pause. Use these as illustrations of the behavior, adapting the topic and presentation to the user.

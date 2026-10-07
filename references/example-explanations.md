@@ -1,132 +1,131 @@
 # Example Explanations
 
-These examples demonstrate the style, depth, and structure expected from visual-rabbit-hole explanations.
+This invented factory is a teaching model. The conversation keeps its labels and assumptions across turns, changing only what the learner chooses to explore. Other subjects can use different structures.
 
-## Example 1: Explaining "Recursion"
+## Turn 1: Discover the constraint
 
-**User**: Explain recursion to me
+**User:** Explain bottlenecks to me.
 
-**Response**:
+**Assistant:**
 
-### The Setup
+You make one machine twice as fast. The factory produces exactly as much. Why?
 
-Here's a problem: you have a pile of nested boxes, and somewhere in the smallest box is a key. You don't know how deep it goes. How do you find it?
+Imagine three machines making identical items. Every item must pass through cutting, painting, and packing. There is plenty of material and demand, the machines run steadily, and work can wait between stages. These are their maximum rates:
 
-You could try to plan ahead — but you don't know the depth. So what if you just said: "open the box. If there's another box inside, do the same thing. If there's a key, stop."
+```text
+       CUT             PAINT            PACK
+   [12/hour] ──────→ [3/hour] ──────→ [12/hour]
 
-That's it. That's recursion. **You just described a process that uses itself as its own instruction manual.**
-
-### The Analogy: Russian Nesting Dolls
-
-Think of a matryoshka doll. To find the smallest one:
-1. Open the current doll
-2. If there's a doll inside, repeat from step 1
-3. If there's no doll inside — you found it. Done.
-
-The beautiful part? You didn't need different instructions for each layer. **One rule handled all of them.**
-
-### The Diagram — Watch it unfold and fold back
-
-```
-UNFOLDING (going deeper)              FOLDING BACK (returning)
-
-findSmallest(🪆🪆🪆🪆)                 findSmallest(🪆🪆🪆🪆)
-  │                                      ▲
-  ▼ open it                              │ returns 🪆
-findSmallest(🪆🪆🪆)                   findSmallest(🪆🪆🪆)
-  │                                      ▲
-  ▼ open it                              │ returns 🪆
-findSmallest(🪆🪆)                     findSmallest(🪆🪆)
-  │                                      ▲
-  ▼ open it                              │ returns 🪆
-findSmallest(🪆)                       findSmallest(🪆)
-  │                                      │
-  └─ nothing inside!                     └─ BASE CASE: return 🪆
-     STOP HERE ─────────────────────────────►
+                  Output: 3/hour
 ```
 
-Notice: it goes all the way down first, *then* all the way back up. Two phases, one rule.
+Suppose you double cutting capacity. Would finished output double too?
 
-### The Gotcha
+```text
+       CUT             PAINT            PACK
+   [24/hour] ──────→ [3/hour] ──────→ [12/hour]
+                       ↑
+              still setting the pace
 
-The #1 mistake: **forgetting the base case**. Without "if there's no doll inside, stop" — your process never ends. In code, that's a stack overflow. Every recursive function needs its "smallest doll."
-
-### The Rabbit Hole
-
-**Go Deeper:**
-- **The call stack** — What physically happens in memory during those two phases (unfold/fold back)
-- **Tail recursion** — A trick where the "fold back" phase disappears entirely, making recursion as fast as a loop
-- **Divide and conquer** — Split the problem, solve each half the same way. This is how mergesort and quicksort work — and why they're so elegant.
-
-**Surprising Connections:**
-- **Fractals in nature** — Romanesco broccoli, coastlines, blood vessels — nature uses the same trick: one rule applied at every scale. Recursion isn't just a coding pattern, it's a structure the universe keeps reusing.
-- **Infinite regress in philosophy** — "Who created the creator?" is a recursion without a base case. Philosophers have debated this for millennia — turns out it's the same bug programmers hit.
-
----
-
-## Example 2: Explaining "Inflation" (non-technical)
-
-**User**: What is inflation and why does it happen?
-
-**Response**:
-
-### The Setup
-
-Here's something weird: a cup of coffee cost $0.25 in 1970. Now it's $5. The coffee didn't get 20x better. So what happened to the money?
-
-### The Analogy: An Auction with Too Much Cash
-
-Imagine 10 people at an auction, each with $100, bidding on 10 pizzas. Pizzas sell for ~$100.
-
-Now the auctioneer hands everyone an extra $100. Same 10 pizzas. But now everyone's waving $200 around. What happens?
-
-Pizzas sell for ~$200. **Nothing real changed — no extra pizza was created — but every dollar became worth less because there are more of them competing for the same stuff.**
-
-### The Diagram — Before and After
-
-```
-BEFORE                              AFTER
-┌─────────────────┐                ┌─────────────────┐
-│  💰💰💰          │                │  💰💰💰💰💰💰    │
-│  Money supply    │                │  More money!     │
-│                  │       ──►      │                  │
-│  🍕🍕🍕          │                │  🍕🍕🍕          │
-│  Same goods      │                │  Same goods      │
-│                  │                │                  │
-│  Price: $10/🍕   │                │  Price: $20/🍕   │
-└─────────────────┘                └─────────────────┘
-
-But wait — where does the extra money come from?
-
-  Demand-Pull          Cost-Push          Money Printing
-  ──────────          ──────────         ──────────────
-  People suddenly     It costs more      Central bank
-  want more stuff     to make stuff      creates more
-  than exists         (oil, wages)       currency
-
-  "Everyone wants     "Costs go up,      "More dollars,
-   the same pizza"     pizza follows"     same pizza"
+                  Output: 3/hour
 ```
 
-### The Gotcha
+Painting still finishes only three items an hour. If cutting keeps producing faster than that, unfinished items accumulate before paint.
 
-You'd think inflation is always bad. But here's the twist: moderate inflation (~2%) is considered *healthy*. It nudges people to spend and invest instead of hoarding cash. **Deflation** — falling prices — sounds great until you realize everyone stops buying ("it'll be cheaper tomorrow"), businesses earn less, lay off workers, and the economy spirals. The real enemy isn't rising prices — it's *unpredictable* prices.
+You've found the **bottleneck**: the stage limiting the line's steady output. Under these assumptions, the line's maximum rate is the smallest stage capacity:
 
-### The Rabbit Hole
+`min(24, 3, 12) = 3 items/hour`
 
-**Go Deeper:**
-- **Central bank interest rates** — The main lever used to fight inflation, and the elegant logic behind why raising rates cools things down
-- **Hyperinflation** — What happens when inflation breaks loose entirely (Zimbabwe printed $100 trillion bills)
-- **Real vs nominal values** — How to stop being fooled by big numbers and think about what money can actually *buy*
+This describes output once the line is running, not how long one item takes to pass through all three machines. It also assumes no breakdowns or defective items. Those are useful complications for later.
 
-**Surprising Connections:**
-- **Equilibrium in chemistry** — Le Chatelier's principle says: disturb a system at equilibrium and it pushes back to restore balance. Central banks do the exact same thing. Economics and chemistry are both studying systems that self-correct — with the same math.
-- **Tragedy of the commons in ecology** — Everyone acting rationally (spending more before prices rise) makes the collective outcome worse (prices rise faster). Same structure as overfishing, climate change, and antibiotic resistance.
+Where next?
 
----
+1. **Go deeper:** What happens after you upgrade the painting machine?
+2. **Go sideways:** Where is the painting machine in your own workday? Think of a step every task needs before it can be finished.
+3. **Break the model:** What if the machines keep stopping and starting?
 
-## Example 3: Using Web Search
+## Turn 2: Follow the chosen branch
 
-**User**: Explain how mRNA vaccines work
+**User:** Take me down the first rabbit hole.
 
-(In this case, use WebSearch to find a recent, clear source to ground the explanation with accurate, current details. Then structure the response the same way — setup, analogy, diagram, gotcha, rabbit hole.)
+**Assistant:**
+
+Keep our faster cutter. Now replace the painter with one that can finish 15 items an hour. What sets the pace?
+
+```text
+                       BEFORE
+       CUT             PAINT            PACK
+   [24/hour] ──────→ [3/hour] ──────→ [12/hour]
+                  Output: 3/hour
+
+                       AFTER
+       CUT             PAINT            PACK
+   [24/hour] ──────→ [15/hour] ─────→ [12/hour]
+                                         ↑
+                                new limiting stage
+                  Output: 12/hour
+```
+
+Packing now sets the ceiling. Painting got five times the capacity; the line got four times the output. We can trace the difference to the next constraint: `min(24, 15, 12) = 12`.
+
+The bottleneck moved. Choosing the next upgrade means looking at the whole line again.
+
+Two threads to pull:
+
+1. If painting can finish 15 items an hour but packing handles 12, where do the extra items go?
+2. What if those rates are averages, and each machine sometimes stops?
+
+## Turn 3: Break the model
+
+**User:** The second one. What if the machines stop sometimes?
+
+**Assistant:**
+
+`Bottlenecks → Changing constraints → Queues`
+
+Our rate labels hid the timing. Let's zoom into packing, which can handle one item every five minutes while running, and give it a ten-minute pause.
+
+Suppose its waiting area starts empty and painted items arrive every four minutes, starting at minute 4. Packing restarts at minute 10:
+
+```text
+MINUTE    ARRIVAL     PACKER                 WAITING
+   0         —       stopped                   0
+   4         A       stopped                   1
+   8         B       stopped                   2
+  10         —       starts A                  1
+  12         C       working on A              2
+  15         —       finishes A, starts B       1
+```
+
+At minute 15, A is finished, B is being packed, and C is waiting. The average rate alone could not tell us that sequence.
+
+The pause created a **queue**. There's also a lasting mismatch: arrivals every four minutes are faster than packing every five. Even after restarting, packing cannot clear the backlog while that arrival pattern continues.
+
+The smallest capacity still gives us a ceiling, but the earlier output calculation assumed steady operation. To understand a particular item's wait, we also need arrival times, pauses, and how much work is already ahead of it.
+
+One useful next question: if arrivals slowed to one every six minutes, how long would this backlog take to clear?
+
+## A clarification stays small
+
+**User:** Does the bottleneck mean the machine that breaks most often?
+
+**Assistant:**
+
+It means the stage limiting the line's output. Frequent breakdowns can make a machine that constraint, but a machine can also be the bottleneck while running perfectly: our original painter worked continuously and still handled only three items an hour.
+
+## A prediction pause is optional
+
+**User:** Walk me through the factory interactively. Let me guess before you explain.
+
+**Assistant:**
+
+Every item passes through all three machines. They run steadily, with plenty of material and room for work to wait:
+
+```text
+       CUT             PAINT            PACK
+   [12/hour] ──────→ [3/hour] ──────→ [12/hour]
+```
+
+You can double one machine's capacity. Which would you choose to increase finished output, and what rate do you predict?
+
+*The assistant waits here because the user explicitly asked to predict before the reveal.*
