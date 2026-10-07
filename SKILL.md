@@ -1,86 +1,82 @@
 ---
 name: visual-rabbit-hole
-description: "Explain any concept with vivid analogies, ASCII diagrams, and curated rabbit holes for deeper exploration. Use when the user asks to understand, learn, or explore a concept — any domain: science, math, programming, business, philosophy, history, etc. Triggers on: 'explain X', 'what is X', 'how does X work', 'teach me about X', 'help me understand X', 'ELI5', 'break down X', 'deep dive into X'. Optimized for visual learners. Can search the web for real-world examples and current information."
+description: "Teach a concept from any domain (science, math, business, philosophy, history, programming ideas): a quick ASCII-diagram explanation in chat, plus an interactive HTML page with why it exists, a vivid analogy, diagrams, a checkpoint quiz, and side quests down the rabbit hole, each with its own quiz. Use when the user wants to learn or deeply understand a concept: 'teach me X', 'help me understand X', 'deep dive into X', 'ELI5 X', 'rabbit hole on X', or /visual-rabbit-hole. Not for quick factual questions or for explaining code in the current repo."
 ---
 
 # Visual Rabbit Hole
 
-Explain any concept — from any domain — in a way that visual learners love. Build intuition before formalism, inspired by 3Blue1Brown's teaching philosophy: make the learner feel like they could have discovered the idea themselves.
+Teach one concept so the learner could have discovered it themselves (3Blue1Brown's philosophy), then send them down side quests that branch off it, and check every step with a quiz. The goal is understanding they can prove, not a page they skimmed.
 
-## Response Mode
+## Two surfaces
 
-Determine the response mode before answering:
+The chat and the page do different jobs. Use both.
 
-**Full Explanation** — use for new concepts, "explain X", "what is X", deep dives:
-→ Include all four sections below (Analogy, Diagram, Gotcha, Rabbit Hole)
+- **Chat (ASCII):** the quick, in-flow version. The learner gets the idea without leaving the terminal.
+- **Page (HTML):** the depth: richer diagrams, step-throughs, quizzes and side quests.
 
-**Follow-up / Clarification** — use when the user asks a follow-up question, wants a specific detail clarified, or says things like "what do you mean by...", "can you expand on...", "how is that different from...":
-→ Answer directly and concisely. Include a diagram or analogy ONLY if it genuinely helps clarify. Skip Gotcha and Rabbit Hole unless the follow-up opens a meaningfully new topic.
+## Modes
 
-**Rabbit Hole Pick** — use when the user picks an item from a previous Rabbit Hole list:
-→ Treat it as a new Full Explanation for that concept.
+- **New concept** → chat answer first, then build the page.
+- **"Quick" / "no page" / "just ELI5"** → chat answer only.
+- **Follow-up or clarification** → chat only, short. Add a small ASCII diagram if it clarifies.
+- **"Next quest" / a side-quest title / "rabbit hole: X"** → same as a new concept, opening with one line linking back to where it branched from.
 
-## Full Explanation Structure
+## The chat answer
 
-Include all four sections in this order for new concept explanations:
+Short enough to read in one screen:
 
-### 1. The Setup — "What problem are we even solving?"
-Before jumping to definitions, frame **why** this concept exists. What question or frustration led someone to invent it? Make the learner feel the need for the idea before revealing it. Then bridge into a vivid, concrete analogy:
-- Use physical, tangible things (not other abstract concepts)
-- Are surprising or delightful — avoid clichés
-- Map cleanly to the concept's key mechanism
-- One analogy for simple concepts, multiple for complex ones
+1. Two or three sentences: the problem this concept solves, then the analogy.
+2. One ASCII diagram in a code block that shows what *changes* (before → after, or the same system in 2-3 states). Box-drawing characters (`┌─┐│└─┘├┤`) and arrows (`→ ← ↑ ↓`); keep it under ~60 columns so it doesn't wrap.
+3. The Gotcha in one line.
+4. The page link or path, and the side-quest titles as a list.
 
-### 2. The Diagram — "Watch it move"
-Don't just draw a static picture — show a **transformation**. The best diagrams reveal what changes and why, like a 3Blue1Brown animation frozen into key frames. Choose the right type:
-- **Flow diagrams** → for processes, sequences, cause-and-effect
-- **Structure diagrams** → for hierarchies, components, layers
-- **Before → After diagrams** → for transformations, showing what changes
-- **Timeline diagrams** → for evolution, phases, history
-- **Zoom diagrams** → start zoomed out (big picture), then zoom into the part that matters
+The page reuses this analogy and expands it; don't contradict the chat version.
 
-Use box-drawing characters (`┌─┐│└─┘├┤`), arrows (`→ ← ↑ ↓`), and emoji sparingly for visual punch. When possible, show multiple states of the same system to convey motion/change.
+## The page
 
-### 3. The Gotcha
-Highlight the most common misconception or counterintuitive truth. Frame it as "Most people think X, but actually Y" or "The #1 mistake is...". This cements understanding by addressing what trips people up.
+One long page with a table of contents and section headers. No tabs for top-level structure. Sections in order:
 
-### 4. The Rabbit Hole — "Branches on the knowledge tree"
-Knowledge is a tree. Every concept is a branch that splits into deeper branches, and — here's the magic — connects sideways to branches from completely different trees.
+1. **The Setup: what problem are we solving?** Make the learner feel the need for the idea before naming it. What frustration led someone to invent it? Include a short *Background* block for beginners, marked as skippable for readers who already know the field.
+2. **The Intuition.** One vivid, physical analogy (two for complex concepts) that maps onto the real mechanism. Then work a concrete example with toy data: actual numbers, actual names, actual steps. Show what *changes*: a step-through ("Next" buttons over frames) or a slider beats a static picture whenever the concept involves motion, iteration or a parameter.
+3. **The Gotcha.** A callout: "Most people think X, but actually Y." The misconception that trips people up most.
+4. **Checkpoint.** 3 multiple-choice questions on the core concept (see Quizzes).
+5. **Side Quests.** 3 or 4 quest cards. Mix:
+   - **Go deeper** (2-3): the next branch down this concept, from accessible to advanced.
+   - **Surprising connection** (1): the same structure in a completely different field. Explain *why* the connection exists.
 
-Structure the rabbit hole in two parts:
+   Each quest card: title + one-line hook, a lesson of 150-300 words with one diagram that reuses the page's diagram families, then 2 quiz questions. The last line of each quest is a copyable prompt, `rabbit hole: <quest title>`, for going further on its own page.
+   The template's tracker shows "2 / 4 quests cleared". A quest is cleared when all its questions are answered correctly.
+6. **Sources**, only if you searched the web. Links with one line each.
 
-**Go Deeper** (2-3 items) — concepts that go further down this branch, from accessible to advanced. Each item: **bold name** + one-line hook explaining why it's interesting.
+## Quizzes
 
-**Surprising Connections** (1-2 items) — concepts from *a completely different field* that share the same underlying structure, pattern, or insight. This is where minds get blown. Examples:
-- Recursion in CS ↔ self-similar fractals in nature ↔ infinite regress in philosophy
-- Supply/demand in economics ↔ equilibrium in chemistry ↔ predator-prey cycles in ecology
-- Gradient descent in ML ↔ evolution by natural selection ↔ how water finds the lowest point
+The quiz is where the teaching sticks, so write it with care:
 
-Always explain *why* the connection exists, not just that it exists.
+- Test understanding, not recall. The best questions make the learner *apply* the idea to a case the page didn't show ("If you doubled X, what happens to Y?").
+- Medium difficulty, no trick wording. A reader who understood gets it; a skimmer doesn't.
+- Distractors are real misconceptions, including the Gotcha, never obviously silly filler.
+- Every option carries its own feedback explaining why it's right or wrong. Wrong answers stay retryable; the explanation is the lesson.
+- 3-4 options; vary the position of the correct one.
 
-## When to Search the Web
+## Diagrams
 
-Use WebSearch when:
-- The concept involves recent developments, current data, or evolving knowledge
-- A real-world example would make the analogy more concrete and grounded
-- The user asks about something niche where specific details matter
-- Verifying accuracy for scientific, medical, or technical claims
+- Pick 2-3 diagram families for the page (e.g. a flow diagram, a before/after, a timeline) and reuse them across the main lesson and the quests, so the learner learns the visual language once.
+- Inline SVG or plain HTML/CSS. ASCII belongs in the chat, not on the page. Label everything and put example data in the diagram itself.
+- Lists are HTML lists. Code or formulas go in `<pre>` (the template styles it with `white-space: pre-wrap`).
 
-Do NOT search when the concept is well-established and you can explain it accurately from training data alone.
+## Writing
 
-When citing web sources, weave them naturally: "For example, [specific detail found via search]..."
+Classic style with the clarity and flow of Martin Kleppmann: confident, concrete, conversational, addressed to "you". Smooth transitions between sections. Rhetorical questions that let the learner sit with a puzzle for a beat before resolving it. Bold key terms on first use.
 
-## Tone and Style
+## Web search
 
-- Conversational, not academic — like an enthusiastic friend who happens to be an expert
-- Use "you" directly — make the reader part of the explanation
-- Ask rhetorical questions that guide discovery: "But wait — what happens if...?", "So what would *you* do here?"
-- Let the learner sit with a puzzle for a beat before resolving it
-- Short paragraphs, generous whitespace
-- Bold key terms on first use
-- No hedging ("kind of", "sort of") — be confident and clear
-- Show genuine delight when something connects: the goal is to make the learner go "oh, that's beautiful"
+Search when the concept involves recent developments or current data, when a real-world example would make the analogy concrete, for niche details, and to verify scientific, medical or technical claims. Don't search for well-established material. Cite what you used in Sources.
 
-## Examples
+## Delivery
 
-See [references/example-explanations.md](references/example-explanations.md) for full input/output examples demonstrating the expected style and depth.
+Start from [references/template.html](references/template.html). It has the shell, light/dark theming, table of contents, quiz component and quest tracker. Fill in the content and keep its quiz markup so the script works.
+
+- **If an Artifact tool is available**: load the `artifact-design` skill (and `artifact-diagramming` when drawing), write the file to the scratchpad, publish it, and give the user the link.
+- **Otherwise**: write `~/rabbit-holes/YYYY-MM-DD-<slug>.html` (the date prefix keeps them time-sorted) and open it (`open` on macOS, `xdg-open` on Linux).
+
+Then finish the chat answer (see above) with the link or path and the quest titles.

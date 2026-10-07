@@ -1,6 +1,6 @@
 {
-  "version": "1.0.0",
+  "version": "2.0.0",
   "organization": "albertbethlowsky",
-  "date": "February 2026",
-  "abstract": "Explain any concept with vivid analogies, ASCII diagrams, and curated rabbit holes for deeper exploration. Optimized for visual learners across any domain — science, math, programming, business, philosophy, and more. Searches the web when real-world examples or current information would strengthen the explanation."
+  "date": "October 2026",
+  "abstract": "Teach any concept as an interactive HTML page: why it exists, a vivid analogy, step-through diagrams, a checkpoint quiz, and side quests down the rabbit hole, each with its own quiz and a progress tracker."
 }
