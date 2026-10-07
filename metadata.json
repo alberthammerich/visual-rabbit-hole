@@ -1,6 +1,6 @@
 {
   "version": "2.0.0",
-  "organization": "albertbethlowsky",
+  "organization": "alberthammerich",
   "date": "October 2026",
-  "abstract": "Teach any concept as an interactive HTML page: why it exists, a vivid analogy, step-through diagrams, a checkpoint quiz, and side quests down the rabbit hole, each with its own quiz and a progress tracker."
+  "abstract": "Explore concepts through concrete puzzles, a short visual explanation in chat, and an interactive HTML page with evolving diagrams, application quizzes, and side quests. Follow connected questions deeper, across disciplines, or into the limits of a model, with per-page progress tracking."
 }
